@@ -1,49 +1,62 @@
+import java.util.ArrayList;
 
-public class Schedule {
+// Interface with isEqual method
+interface ComparableItem {
+    boolean isEqual(Object obj);
+}
 
+// Superclass for common fields (abstract class)
+abstract class Course {
     private String scheduleId;
-    private String classId;
-    private String day;
-    private String time;
 
-    public Schedule(String scheduleId, String classId, String day, String time) {
+    // Constructor
+    public Course(String scheduleId) {
         this.scheduleId = scheduleId;
-        this.classId = classId;
-        this.day = day;
-        this.time = time;
     }
 
-    // Getters and Setters
+    // Getter for scheduleId
     public String getScheduleId() {
         return scheduleId;
     }
 
+    // Setter for scheduleId
     public void setScheduleId(String scheduleId) {
         this.scheduleId = scheduleId;
     }
 
-    public String getClassId() {
-        return classId;
-    }
+    // Abstract method to be implemented in subclasses
+    public abstract String toString();
+}
 
-    public void setClassId(String classId) {
+// Subclass Schedule extending Course and implementing ComparableItem interface
+public class Schedule extends Course implements ComparableItem {
+    private String classId;
+    private String day;
+    private String time;
+
+    // Constructor
+    public Schedule(String scheduleId, String classId, String day, String time) {
+        super(scheduleId); // Call the constructor of the superclass (Course)
         this.classId = classId;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
         this.day = day;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
         this.time = time;
     }
 
+    // isEqual method from ComparableCourse interface
+    @Override
+    public boolean isEqual(Object obj) {
+        if (obj instanceof Schedule) {
+            Schedule otherSchedule = (Schedule) obj;
+            return this.getScheduleId().equals(otherSchedule.getScheduleId()); // Compare by scheduleId
+        }
+        return false;
+    }
+
+    // toString method from Course class
+    @Override
+    public String toString() {
+        return "Schedule ID: " + getScheduleId() + ", Class ID: " + classId + ", Day: " + day + ", Time: " + time;
+    }
+
+    
 }
