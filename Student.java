@@ -86,4 +86,19 @@ public class Student {
     public void setEnrollmentDate(String enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
     }
+
+    //isEqual Method
+    public boolean isEqual(Student ohterStudent) {
+        return this.studentId.equals(ohterStudent.studentId);
+    }
+
+    //toString Method
+    @Override
+    public String toString() {
+        return "Student ID: " + studentId
+                + ", Name: " + firstName + " " + lastName
+                + ", DOB: " + dob
+                + ", Enrollment Date: " + enrollmentDate;
+    }
+
 }
