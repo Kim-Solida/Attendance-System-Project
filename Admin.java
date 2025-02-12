@@ -97,4 +97,18 @@ public class Admin {
         this.isActive = isActive;
     }
 
+    //isEqual Method
+    public boolean isEqual(Admin otheraAdmin) {
+        return this.adminId.equals(otheraAdmin.adminId);
+    }
+
+    //toString Method
+    @Override
+    public String toString() {
+        return "Admin ID: " + adminId
+                + ", Username: " + username
+                + ", Full Name: " + fullName
+                + ", Role: " + role;
+    }
+
 }
