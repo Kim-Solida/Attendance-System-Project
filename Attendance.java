@@ -1,114 +1,65 @@
 
-public class Admin {
+public class Attendance {
 
-    private String adminId;
-    private String username;
-    private String password;
-    private String fullName;
-    private String email;
-    private String phoneNumber;
-    private String role;
-    private String createdAt;
-    private boolean isActive;
+    private String attendanceId;
+    private String studentId;
+    private String classDate;
+    private String status;
 
-    // Constructor
-    public Admin(String adminId, String username, String password, String fullName, String email, String phoneNumber, String role, String createdAt, boolean isActive) {
-        this.adminId = adminId;
-        this.username = username;
-        this.password = password;
-        this.fullName = fullName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.role = role;
-        this.createdAt = createdAt;
-        this.isActive = isActive;
+    public Attendance(String attendanceId, String studentId, String classDate, String status) {
+        this.attendanceId = attendanceId;
+        this.studentId = studentId;
+        this.classDate = classDate;
+        this.status = status;
     }
 
     // Getters and Setters
-    public String getAdminId() {
-        return adminId;
+    public String getAttendanceId() {
+        return attendanceId;
     }
 
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
+    public void setAttendanceId(String attendanceId) {
+        this.attendanceId = attendanceId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getClassDate() {
+        return classDate;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setClassDate(String classDate) {
+        this.classDate = classDate;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getStatus() {
+        return status;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     //isEqual Method
-    public boolean isEqual(Admin otheraAdmin) {
-        return this.adminId.equals(otheraAdmin.adminId);
+    public boolean isEqual(Attendance otherAttendance) {
+        return this.attendanceId.equals(otherAttendance.attendanceId)
+                && this.studentId.equals(otherAttendance.studentId)
+                && this.classDate.equals(otherAttendance.classDate);
     }
 
     //toString Method
     @Override
     public String toString() {
-        return "Admin ID: " + adminId
-                + ", Username: " + username
-                + ", Full Name: " + fullName
-                + ", Role: " + role;
+        return "Attendance ID: " + attendanceId
+                + ", Student ID: " + studentId
+                + ", Date: " + classDate
+                + ", Status: " + status;
     }
 
 }
