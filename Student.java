@@ -1,25 +1,51 @@
 
-public class Student {
+public class Student implements Authentication {
 
     private String studentId;
-    private String firstName;
-    private String lastName;
+    private String studentFirstName;
+    private String studentLastName;
+    private String studentPassword;
     private String dob;
+    private String studentAge;
+    private String sex;
     private String address;
     private String email;
     private String phoneNumber;
     private String enrollmentDate;
 
-    //Constructor
-    public Student(String studentId, String firstName, String lastName, String dob, String address, String email, String phoneNumber, String enrollmentDate) {
+    // Constructor
+    public Student(String studentId, String studentFirstName, String studentLastName, String dob,
+            String studentAge, String sex, String address, String email,
+            String phoneNumber, String enrollmentDate) {
         this.studentId = studentId;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.studentFirstName = studentFirstName;
+        this.studentLastName = studentLastName;
         this.dob = dob;
+        this.studentAge = studentAge;
+        this.sex = sex;
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.enrollmentDate = enrollmentDate;
+    }
+
+    @Override
+    public void register(String studentFirstName, String studentLastName, String studentPassword) {
+        this.studentFirstName = studentFirstName;
+        this.studentLastName = studentLastName;
+        this.studentPassword = studentPassword;
+        System.out.println("Student registered successfully!");
+    }
+
+    @Override
+    public void login(String studentFirstName, String studentLastName, String studentPassword) {
+        if (this.studentFirstName.equals(studentFirstName)
+                && this.studentLastName.equals(studentLastName)
+                && this.studentPassword.equals(studentPassword)) {
+            System.out.println("Login successful! Welcome, " + this.studentFirstName + " " + this.studentLastName);
+        } else {
+            System.out.println("Login failed! Incorrect username or password.");
+        }
     }
 
     // Getters and Setters
@@ -31,20 +57,24 @@ public class Student {
         this.studentId = studentId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getStudentFirstName() {
+        return studentFirstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setStudentFirstName(String studentFirstName) {
+        this.studentFirstName = studentFirstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getStudentLastName() {
+        return studentLastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setStudentLastName(String studentLastName) {
+        this.studentLastName = studentLastName;
+    }
+
+    public String getFullName() {
+        return studentFirstName + " " + studentLastName;
     }
 
     public String getDob() {
@@ -53,6 +83,22 @@ public class Student {
 
     public void setDob(String dob) {
         this.dob = dob;
+    }
+
+    public String getStudentAge() {
+        return studentAge;
+    }
+
+    public void setStudentAge(String studentAge) {
+        this.studentAge = studentAge;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getAddress() {
@@ -87,18 +133,19 @@ public class Student {
         this.enrollmentDate = enrollmentDate;
     }
 
-    //isEqual Method
-    public boolean isEqual(Student ohterStudent) {
-        return this.studentId.equals(ohterStudent.studentId);
+    // isEqual Method
+    public boolean isEqual(Student otherStudent) {
+        return this.studentId.equals(otherStudent.studentId);
     }
 
-    //toString Method
+    // toString Method
     @Override
     public String toString() {
         return "Student ID: " + studentId
-                + ", Name: " + firstName + " " + lastName
+                + ", Name: " + studentFirstName + " " + studentLastName
                 + ", DOB: " + dob
+                + ", Age: " + studentAge
+                + ", Sex: " + sex
                 + ", Enrollment Date: " + enrollmentDate;
     }
-
 }
