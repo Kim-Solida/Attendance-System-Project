@@ -1,27 +1,35 @@
+
 import java.util.ArrayList;
 
 public class StudentManager {
 
-    private static ArrayList<Student> studentList = new ArrayList<>();
+    private ArrayList<Student> students;
 
-    public static void addStudent(Student student) {
-        studentList.add(student);
+    public StudentManager() {
+        this.students = new ArrayList<>();
     }
 
-    public static void removeStudent(Student student) {
-        studentList.remove(student);
+    public void addStudent(Student student) {
+        students.add(student);
     }
 
-    public static Student getStudentById(String studentId) {
-        for (Student student : studentList) {
-            if (student.getStudentId().equals(studentId)) {
-                return student;
+    public void removeStudent(Student student) {
+        students.remove(student);
+    }
+
+    public Student getStudentById(String studentId) {
+        for (Student s : students) {
+            if (s.getStudentId().equals(studentId)) {
+                return s;
             }
         }
         return null;
     }
 
-    public static ArrayList<Student> getAllStudents() {
-        return studentList;
+    public void displayAllStudents() {
+        System.out.println("All Students:");
+        for (Student s : students) {
+            System.out.println("- " + s.getStudentFirstName() + " (ID: " + s.getStudentId() + ")");
+        }
     }
 }
