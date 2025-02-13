@@ -62,4 +62,8 @@ public class Attendance {
                 + ", Status: " + status;
     }
 
+    void displayAttendance() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }
