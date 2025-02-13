@@ -1,114 +1,83 @@
 
-public class Admin {
+public class Class {
 
-    private String adminId;
-    private String username;
-    private String password;
-    private String fullName;
-    private String email;
-    private String phoneNumber;
-    private String role;
-    private String createdAt;
-    private boolean isActive;
+    private String classId;
+    private String className;
+    private String teacherName;
+    private String startTime;
+    private String endTime;
+    private String location;
 
-    // Constructor
-    public Admin(String adminId, String username, String password, String fullName, String email, String phoneNumber, String role, String createdAt, boolean isActive) {
-        this.adminId = adminId;
-        this.username = username;
-        this.password = password;
-        this.fullName = fullName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.role = role;
-        this.createdAt = createdAt;
-        this.isActive = isActive;
+    public Class(String classId, String className, String teacherName, String startTime, String endTime, String location) {
+        this.classId = classId;
+        this.className = className;
+        this.teacherName = teacherName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.location = location;
     }
 
     // Getters and Setters
-    public String getAdminId() {
-        return adminId;
+    public String getClassId() {
+        return classId;
     }
 
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
+    public void setClassId(String classId) {
+        this.classId = classId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getClassName() {
+        return className;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
-    public String getPassword() {
-        return password;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getLocation() {
+        return location;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     //isEqual Method
-    public boolean isEqual(Admin otheraAdmin) {
-        return this.adminId.equals(otheraAdmin.adminId);
+    public boolean isEqual(Class otherClass) {
+        return this.classId.equals(otherClass.classId);
     }
 
     //toString Method
     @Override
     public String toString() {
-        return "Admin ID: " + adminId
-                + ", Username: " + username
-                + ", Full Name: " + fullName
-                + ", Role: " + role;
+        return "Class ID: " + classId
+                + ", Name: " + className
+                + ", Teacher: " + teacherName
+                + ", Location: " + location;
     }
 
 }
