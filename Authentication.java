@@ -1,7 +1,9 @@
 
 public interface Authentication {
 
-    void register(String firstName, String lastName, String password);
+    // For Register
+    void register(String firstName, String lastName, String email, String phoneNumber, String password);
 
-    void login(String firstName, String lastName, String password);
+    // For Login
+    void login(String email, String password);
 }
