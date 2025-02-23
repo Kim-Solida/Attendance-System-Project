@@ -1,16 +1,8 @@
 import java.util.ArrayList;
 
-public class AdminManager {
+public class AdminManager extends UserManager {
 
     private static ArrayList<Admin> adminList = new ArrayList<>();
-
-    public static void addAdmin(Admin admin) {
-        adminList.add(admin);
-    }
-
-    public static void removeAdmin(Admin admin) {
-        adminList.remove(admin);
-    }
 
     public static Admin getAdminById(String adminId) {
         for (Admin admin : adminList) {
