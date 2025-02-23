@@ -1,20 +1,12 @@
 
 import java.util.ArrayList;
 
-public class StudentManager {
+public class StudentManager extends UserManager {
 
     private ArrayList<Student> students;
 
     public StudentManager() {
         this.students = new ArrayList<>();
-    }
-
-    public void addStudent(Student student) {
-        students.add(student);
-    }
-
-    public void removeStudent(Student student) {
-        students.remove(student);
     }
 
     public Student getStudentById(String studentId) {
@@ -25,6 +17,7 @@ public class StudentManager {
         }
         return null;
     }
+    
 
     public void displayAllStudents() {
         System.out.println("All Students:");
