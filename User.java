@@ -1,15 +1,17 @@
-public class User implements Authentication {
+
+public abstract class User implements Authentication {
 
     private String firstName;
     private String lastName;
     private String password;
+    private String dob;
     private String age;
     private String sex;
     private String email;
     private String phoneNumber;
 
     // Constructor
-    public User(String firstName, String lastName, String password,
+    public User(String firstName, String lastName, String password, String dob,
             String age, String sex, String email, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,21 +24,20 @@ public class User implements Authentication {
 
     // Implementing register method from Authentication interface
     @Override
-    public void register(String firstName, String lastName, String email, String phoneNumber, String password, String age, String sex) {
+    public void register(String firstName, String lastName, String email, String phoneNumber, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.age = age;
-        this.sex = sex; 
         System.out.println("User registered successfully!");
     }
 
     // Implementing login method from Authentication interface
     @Override
     public void login(String email, String password) {
-        if (this.email.equals(email) && this.password.equals(password)) {
+        if (this.email.equals(email)
+                && this.password.equals(password)) {
             System.out.println("Login successful! Welcome, " + this.email);
         } else {
             System.out.println("Login failed! Incorrect username or password.");
@@ -44,11 +45,6 @@ public class User implements Authentication {
     }
 
     // Getters and Setters
-    public User(String firstname, String lastname) {
-        this.firstName = firstname;
-        this.lastName = lastname;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -71,6 +67,14 @@ public class User implements Authentication {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
     public String getAge() {
@@ -104,20 +108,7 @@ public class User implements Authentication {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    // Equals Method - compares users based on email
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        User otherUser = (User) obj;
-        return email.equals(otherUser.email);
-    }
-
+}
     // toString Method - returns a string representation of User
     @Override
     public String toString() {
