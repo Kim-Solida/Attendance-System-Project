@@ -1,17 +1,21 @@
+
 public class Student extends User {
 
     private String studentId;
-    private String dob;
     private String address;
     private String enrollmentDate;
 
     // Constructor
-    public Student(String firstName, String lastName, String password, String age, String sex, String email, String phoneNumber, String studentId, String dob, String address, String enrollmentDate) {
-        super(firstName, lastName, password, age, sex, email, phoneNumber);
+    public Student(String firstName, String lastName, String password, String age,
+            String sex, String email, String phoneNumber, String studentId,
+            String dob, String address, String enrollmentDate) {
+
+        // Call the superclass constructor
+        super(firstName, lastName, password, dob, age, sex, email, phoneNumber);
         this.studentId = studentId;
-        this.dob = dob;
         this.address = address;
         this.enrollmentDate = enrollmentDate;
+        
     }
 
     // Getters and Setters
@@ -21,14 +25,6 @@ public class Student extends User {
 
     public void setStudentId(String studentId) {
         this.studentId = studentId;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
     }
 
     public String getAddress() {
@@ -47,17 +43,9 @@ public class Student extends User {
         this.enrollmentDate = enrollmentDate;
     }
 
-    // Equals Method
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Student otherStudent = (Student) obj;
-        return studentId.equals(otherStudent.studentId);
+    // isEqual Method
+    public boolean isEqual(Student otherStudent) {
+        return this.studentId.equals(otherStudent.studentId);
     }
 
     // toString Method
@@ -65,9 +53,10 @@ public class Student extends User {
     public String toString() {
         return "Student ID: " + studentId
                 + ", Name: " + getFirstName() + " " + getLastName()
-                + ", DOB: " + dob
                 + ", Age: " + getAge()
                 + ", Sex: " + getSex()
+                + ", Phone Number: " + getPhoneNumber()
+                + ", DOB: " + getDob()
                 + ", Address: " + address
                 + ", Enrollment Date: " + enrollmentDate;
     }
