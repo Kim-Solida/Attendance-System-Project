@@ -1,4 +1,3 @@
-
 public class Student extends User {
 
     private String studentId;
@@ -48,9 +47,17 @@ public class Student extends User {
         this.enrollmentDate = enrollmentDate;
     }
 
-    // isEqual Method
-    public boolean isEqual(Student otherStudent) {
-        return this.studentId.equals(otherStudent.studentId);
+    // Equals Method
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Student otherStudent = (Student) obj;
+        return studentId.equals(otherStudent.studentId);
     }
 
     // toString Method
@@ -61,6 +68,7 @@ public class Student extends User {
                 + ", DOB: " + dob
                 + ", Age: " + getAge()
                 + ", Sex: " + getSex()
+                + ", Address: " + address
                 + ", Enrollment Date: " + enrollmentDate;
     }
 }
