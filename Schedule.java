@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
-// Interface with isEqual method
+// Interface for equality comparison
 interface ComparableItem {
-    boolean isEqual(Object obj);
+    boolean equals(Object obj);
 }
 
 // Superclass for common fields (abstract class)
@@ -25,6 +25,7 @@ abstract class Course {
     }
 
     // Abstract method to be implemented in subclasses
+    @Override
     public abstract String toString();
 }
 
@@ -42,21 +43,22 @@ public class Schedule extends Course implements ComparableItem {
         this.time = time;
     }
 
-    // isEqual method from ComparableCourse interface
+    // Equals method override
     @Override
-    public boolean isEqual(Object obj) {
-        if (obj instanceof Schedule) {
-            Schedule otherSchedule = (Schedule) obj;
-            return this.getScheduleId().equals(otherSchedule.getScheduleId()); // Compare by scheduleId
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
-        return false;
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Schedule otherSchedule = (Schedule) obj;
+        return this.getScheduleId().equals(otherSchedule.getScheduleId());
     }
 
-    // toString method from Course class
+    // toString method override
     @Override
     public String toString() {
         return "Schedule ID: " + getScheduleId() + ", Class ID: " + classId + ", Day: " + day + ", Time: " + time;
     }
-
-    
 }
