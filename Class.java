@@ -1,4 +1,3 @@
-
 public class Class {
 
     private String classId;
@@ -66,18 +65,27 @@ public class Class {
         this.location = location;
     }
 
-    //isEqual Method
-    public boolean isEqual(Class otherClass) {
-        return this.classId.equals(otherClass.classId);
+    // Equals Method
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Class otherClass = (Class) obj;
+        return classId.equals(otherClass.classId);
     }
 
-    //toString Method
+    // toString Method
     @Override
     public String toString() {
         return "Class ID: " + classId
                 + ", Name: " + className
                 + ", Teacher: " + teacherName
+                + ", Start Time: " + startTime
+                + ", End Time: " + endTime
                 + ", Location: " + location;
     }
-
 }
