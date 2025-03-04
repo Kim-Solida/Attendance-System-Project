@@ -1,12 +1,12 @@
-
 public class Attendance {
-
+    
     private String attendanceId;
     private String studentId;
     private String classDate;
-    private String status;
+    private String status; 
 
-    public Attendance(String attendanceId, String studentId, String classDate, String status) {
+    public Attendance(String attendanceId, String studentId, String classDate, String status) 
+    {
         this.attendanceId = attendanceId;
         this.studentId = studentId;
         this.classDate = classDate;
@@ -46,24 +46,25 @@ public class Attendance {
         this.status = status;
     }
 
-    //isEqual Method
-    public boolean isEqual(Attendance otherAttendance) {
-        return this.attendanceId.equals(otherAttendance.attendanceId)
-                && this.studentId.equals(otherAttendance.studentId)
-                && this.classDate.equals(otherAttendance.classDate);
+    // Equals Method
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Attendance other = (Attendance) obj;
+        return attendanceId.equals(other.attendanceId);
     }
 
-    //toString Method
+    // toString Method
     @Override
     public String toString() {
         return "Attendance ID: " + attendanceId
                 + ", Student ID: " + studentId
-                + ", Date: " + classDate
+                + ", Class Date: " + classDate
                 + ", Status: " + status;
     }
-
-    void displayAttendance() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
 }
