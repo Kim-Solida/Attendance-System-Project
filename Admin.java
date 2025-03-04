@@ -9,12 +9,15 @@ public class Admin extends User {
     // Constructor
     public Admin(String firstName, String lastName, String password, 
             String dob, String age, String sex, String email,
-            String phoneNumber, String adminId, String role) {
+            String phoneNumber, String adminId, String role,
+            String workAddress, String hireDate) {
                 
         // Call the superclass constructor
         super(firstName, lastName, password, dob, age, sex, email, phoneNumber); 
         this.adminId = adminId;
         this.role = role;
+        this.workAddress = workAddress;
+        this.hireDate = hireDate;
     }
 
     // Getters and Setters
@@ -50,9 +53,22 @@ public class Admin extends User {
         this.hireDate = hireDate;
     }
 
-    //isEqual Method
-    public boolean isEqual(Admin otherAdmin) {
-        return this.adminId.equals(otherAdmin.adminId);
+    //Equals Method
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Admin admin = (Admin) obj;
+        return adminId.equals(admin.adminId);
+    }
+
+    @Override
+    public int hashCode() {
+        return adminId.hashCode();
     }
 
     //toString Method
