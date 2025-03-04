@@ -1,210 +1,111 @@
-public class Admin extends User {
 
-    private String adminId;
-    private String role;
-    private String department;
-    private String employeeId;
-    private String dateOfBirth;
-    private String workAddress;
-    private String hireDate;
+public abstract class User implements Authentication {
+
+    private String firstName;
+    private String lastName;
+    private String password;
+    private String dob;
+    private String age;
+    private String sex;
+    private String email;
+    private String phoneNumber;
 
     // Constructor
-    public Admin(String firstName, String lastName, String password, String age, String sex, String email, String phoneNumber, String adminId, String role, String department, String employeeId, String dateOfBirth, String workAddress, String hireDate) {
-        super(firstName, lastName, password, age, sex, email, phoneNumber); // Call the superclass constructor
-        this.adminId = adminId;
-        this.role = role;
-        this.department = department;
-        this.employeeId = employeeId;
-        this.dateOfBirth = dateOfBirth;
-        this.workAddress = workAddress;
-        this.hireDate = hireDate;
+    public User(String firstName, String lastName, String password, String dob,
+            String age, String sex, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.age = age;
+        this.sex = sex;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    // Implementing register method from Authentication interface
+    @Override
+    public void register(String firstName, String lastName, String email, String phoneNumber, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        System.out.println("User registered successfully!");
+    }
+
+    // Implementing login method from Authentication interface
+    @Override
+    public void login(String email, String password) {
+        if (this.email.equals(email)
+                && this.password.equals(password)) {
+            System.out.println("Login successful! Welcome, " + this.email);
+        } else {
+            System.out.println("Login failed! Incorrect username or password.");
+        }
     }
 
     // Getters and Setters
-    public String getAdminId() {
-        return adminId;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getRole() {
-        return role;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-    
-    public String getDepartment() {
-        return department;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public String getPassword() {
+        return password;
     }
 
-    public String getEmployeeId() {
-        return employeeId;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public String getDob() {
+        return dob;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public String getAge() {
+        return age;
     }
 
-    public String getWorkAddress() {
-        return workAddress;
+    public void setAge(String age) {
+        this.age = age;
     }
 
-    public void setWorkAddress(String workAddress) {
-        this.workAddress = workAddress;
+    public String getSex() {
+        return sex;
     }
 
-    public String getHireDate() {
-        return hireDate;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
-    public void setHireDate(String hireDate) {
-        this.hireDate = hireDate;
+    public String getEmail() {
+        return email;
     }
 
-    // Equals Method
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Admin otherAdmin = (Admin) obj;
-        return adminId.equals(otherAdmin.adminId);
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    // toString Method
-    @Override
-    public String toString() {
-        return "Admin ID: " + adminId
-                + ", Name: " + getFirstName() + " " + getLastName()
-                + ", Role: " + role
-                + ", Department: " + department
-                + ", Employee ID: " + employeeId
-                + ", DOB: " + dateOfBirth
-                + ", Work Address: " + workAddress
-                + ", Hire Date: " + hireDate;
-    }
-}
-public class Admin extends User {
-
-    private String adminId;
-    private String role;
-    private String department;
-    private String employeeId;
-    private String dateOfBirth;
-    private String workAddress;
-    private String hireDate;
-
-    // Constructor
-    public Admin(String firstName, String lastName, String password, String age, String sex, String email, String phoneNumber, String adminId, String role, String department, String employeeId, String dateOfBirth, String workAddress, String hireDate) {
-        super(firstName, lastName, password, age, sex, email, phoneNumber); // Call the superclass constructor
-        this.adminId = adminId;
-        this.role = role;
-        this.department = department;
-        this.employeeId = employeeId;
-        this.dateOfBirth = dateOfBirth;
-        this.workAddress = workAddress;
-        this.hireDate = hireDate;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    // Getters and Setters
-    public String getAdminId() {
-        return adminId;
-    }
-
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-    
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getWorkAddress() {
-        return workAddress;
-    }
-
-    public void setWorkAddress(String workAddress) {
-        this.workAddress = workAddress;
-    }
-
-    public String getHireDate() {
-        return hireDate;
-    }
-
-    public void setHireDate(String hireDate) {
-        this.hireDate = hireDate;
-    }
-
-    // Equals Method
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Admin otherAdmin = (Admin) obj;
-        return adminId.equals(otherAdmin.adminId);
-    }
-
-    // toString Method
-    @Override
-    public String toString() {
-        return "Admin ID: " + adminId
-                + ", Name: " + getFirstName() + " " + getLastName()
-                + ", Role: " + role
-                + ", Department: " + department
-                + ", Employee ID: " + employeeId
-                + ", DOB: " + dateOfBirth
-                + ", Work Address: " + workAddress
-                + ", Hire Date: " + hireDate;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
