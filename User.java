@@ -1,4 +1,3 @@
-
 public class User implements Authentication {
 
     private String firstName;
@@ -23,20 +22,21 @@ public class User implements Authentication {
 
     // Implementing register method from Authentication interface
     @Override
-    public void register(String firstName, String lastName, String email, String phoneNumber, String password) {
+    public void register(String firstName, String lastName, String email, String phoneNumber, String password, String age, String sex) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.age = age;
+        this.sex = sex; 
         System.out.println("User registered successfully!");
     }
 
     // Implementing login method from Authentication interface
     @Override
     public void login(String email, String password) {
-        if (this.email.equals(email)
-                && this.password.equals(password)) {
+        if (this.email.equals(email) && this.password.equals(password)) {
             System.out.println("Login successful! Welcome, " + this.email);
         } else {
             System.out.println("Login failed! Incorrect username or password.");
@@ -44,6 +44,11 @@ public class User implements Authentication {
     }
 
     // Getters and Setters
+    public User(String firstname, String lastname) {
+        this.firstName = firstname;
+        this.lastName = lastname;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -98,5 +103,28 @@ public class User implements Authentication {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    // Equals Method - compares users based on email
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        User otherUser = (User) obj;
+        return email.equals(otherUser.email);
+    }
+
+    // toString Method - returns a string representation of User
+    @Override
+    public String toString() {
+        return "User: " + firstName + " " + lastName 
+                + ", Email: " + email
+                + ", Age: " + age
+                + ", Sex: " + sex
+                + ", Phone: " + phoneNumber;
     }
 }
