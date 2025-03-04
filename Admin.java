@@ -1,111 +1,72 @@
 
-public abstract class User implements Authentication {
+public class Admin extends User {
 
-    private String firstName;
-    private String lastName;
-    private String password;
-    private String dob;
-    private String age;
-    private String sex;
-    private String email;
-    private String phoneNumber;
+    private String adminId;
+    private String role;
+    private String workAddress;
+    private String hireDate;
 
     // Constructor
-    public User(String firstName, String lastName, String password, String dob,
-            String age, String sex, String email, String phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.age = age;
-        this.sex = sex;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
-
-    // Implementing register method from Authentication interface
-    @Override
-    public void register(String firstName, String lastName, String email, String phoneNumber, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        System.out.println("User registered successfully!");
-    }
-
-    // Implementing login method from Authentication interface
-    @Override
-    public void login(String email, String password) {
-        if (this.email.equals(email)
-                && this.password.equals(password)) {
-            System.out.println("Login successful! Welcome, " + this.email);
-        } else {
-            System.out.println("Login failed! Incorrect username or password.");
-        }
+    public Admin(String firstName, String lastName, String password, 
+            String dob, String age, String sex, String email,
+            String phoneNumber, String adminId, String role) {
+                
+        // Call the superclass constructor
+        super(firstName, lastName, password, dob, age, sex, email, phoneNumber); 
+        this.adminId = adminId;
+        this.role = role;
     }
 
     // Getters and Setters
-    public String getFirstName() {
-        return firstName;
+    public String getAdminId() {
+        return adminId;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getRole() {
+        return role;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public String getPassword() {
-        return password;
+    public String getWorkAddress() {
+        return workAddress;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setWorkAddress(String workAddress) {
+        this.workAddress = workAddress;
     }
 
-    public String getDob() {
-        return dob;
+    public String getHireDate() {
+        return hireDate;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
+    public void setHireDate(String hireDate) {
+        this.hireDate = hireDate;
     }
 
-    public String getAge() {
-        return age;
+    //isEqual Method
+    public boolean isEqual(Admin otherAdmin) {
+        return this.adminId.equals(otherAdmin.adminId);
     }
 
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    //toString Method
+    @Override
+    public String toString() {
+        return "Admin ID: " + adminId
+                + ", Name: " + getFirstName() + " " + getLastName()
+                + ", Role: " + role
+                + ", Age: " + getAge()
+                + ", Sex: " + getSex()
+                + ", Role: " + role
+                + ", Phone Number: " + getPhoneNumber()
+                + ", Date of Birth: " + getDob()
+                + ", Work Address: " + workAddress
+                + ", Hire Date: " + hireDate;
     }
 }
