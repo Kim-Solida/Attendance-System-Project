@@ -1,60 +1,86 @@
-
 import java.util.ArrayList;
 
 public class UserManager {
 
-    private ArrayList<Admin> adminList;
-    private ArrayList<Student> studentList;
+    private ArrayList<User> users;
+    private static User currentUser;  // Stores the currently logged-in user
 
     public UserManager() {
-        this.adminList = new ArrayList<>();
-        this.studentList = new ArrayList<>();
+        this.users = new ArrayList<>();
     }
 
+    // Add user (Admin or Student)
     public void addUser(User user) {
-        if (user instanceof Admin) {
-            adminList.add((Admin) user);
-        } else if (user instanceof Student) {
-            studentList.add((Student) user);
+        if (users.contains(user)) {
+            System.err.println("Error: User already exists: " + user.getFirstName() + " " + user.getLastName());
+            return;
         }
+        users.add(user);
         System.out.println(user.getFirstName() + " " + user.getLastName() + " added successfully.");
     }
 
-    public void removeUser(User user) {
-        if (user instanceof Admin) {
-            adminList.remove((Admin) user);
-        } else if (user instanceof Student) {
-            studentList.remove((Student) user);
+    // Remove user (Admin or Student)
+    public void removeUser(User user) throws UserNotFoundException {
+        if (!users.contains(user)) {
+            throw new UserNotFoundException("User not found: " + user.getFirstName() + " " + user.getLastName());
         }
+        users.remove(user);
         System.out.println(user.getFirstName() + " " + user.getLastName() + " removed successfully.");
     }
 
-    public Admin getAdminById(String adminId) {
-        for (Admin admin : adminList) {
-            if (admin.getAdminId().equals(adminId)) {
-                return admin;
+    // Get Admin by ID
+    public Admin getAdminById(String adminId) throws UserNotFoundException {
+        for (User user : users) {
+            if (user instanceof Admin && ((Admin) user).getAdminId().equals(adminId)) {
+                return (Admin) user;
             }
         }
-        return null;
+        throw new UserNotFoundException("Admin with ID " + adminId + " not found.");
     }
 
-    public Student getStudentById(String studentId) {
-        for (Student student : studentList) {
-            if (student.getStudentId().equals(studentId)) {
-                return student;
+    // Get Student by ID
+    public Student getStudentById(String studentId) throws UserNotFoundException {
+        for (User user : users) {
+            if (user instanceof Student && ((Student) user).getStudentId().equals(studentId)) {
+                return (Student) user;
             }
         }
-        return null;
+        throw new UserNotFoundException("Student with ID " + studentId + " not found.");
     }
 
-    public ArrayList<Admin> getAllAdmins() {
-        return adminList;
-    }
-
-    public void displayAllStudents() {
-        System.out.println("All Students:");
-        for (Student s : studentList) {
-            System.out.println("- " + s.getFirstName() + " (ID: " + s.getStudentId() + ")");
+    // Display all users
+    public void displayAllUsers() {
+        System.out.println("All Users:");
+        for (User user : users) {
+            System.out.println("- " + user);
         }
+    }
+
+    // 🔹 Login method - Finds the user and sets `currentUser`
+    public boolean loginUser(String email, String password) {
+        for (User user : users) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                currentUser = user; // Store the logged-in user
+                System.out.println("Login successful! Welcome, " + user.getFirstName());
+                return true;
+            }
+        }
+        System.out.println("Login failed! Incorrect email or password.");
+        return false;
+    }
+
+    // 🔹 Logout method - Clears the session
+    public void logoutUser() {
+        if (currentUser != null) {
+            System.out.println("User " + currentUser.getFirstName() + " logged out successfully.");
+            currentUser = null;
+        } else {
+            System.out.println("No user is currently logged in.");
+        }
+    }
+
+    // 🔹 Get the currently logged-in user
+    public static User getLoggedInUser() {
+        return currentUser;
     }
 }
