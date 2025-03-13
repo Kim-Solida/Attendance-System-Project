@@ -11,23 +11,60 @@ public class UserManager {
 
     // Add user (Admin or Student)
     public void addUser(User user) {
-        if (users.contains(user)) {
-            System.err.println("Error: User already exists: " + user.getFirstName() + " " + user.getLastName());
-            return;
+        try {
+            if (users.contains(user)) {
+                System.err.println("Error: User already exists: " + user.getFirstName() + " " + user.getLastName());
+                return;
+            }
+            users.add(user);
+            System.out.println(user.getFirstName() + " " + user.getLastName() + " added successfully.");
+        } catch (Exception e) {
+            System.err.println("Something went wrong: " + e.getMessage());
+        } finally {
+            System.out.println("Finished adding user.");
         }
-        users.add(user);
-        System.out.println(user.getFirstName() + " " + user.getLastName() + " added successfully.");
     }
+    
 
     // Remove user (Admin or Student)
-    public void removeUser(User user) throws UserNotFoundException {
-        if (!users.contains(user)) {
-            throw new UserNotFoundException("User not found: " + user.getFirstName() + " " + user.getLastName());
+    public void removeUser(User user) {
+        try {
+            // Check if the user exists in the collection
+            if (!users.contains(user)) {
+                throw new UserNotFoundException("User not found: " + user.getFirstName() + " " + user.getLastName());
+            }
+
+            // Remove the user from the list
+            users.remove(user);
+            System.out.println(user.getFirstName() + " " + user.getLastName() + " removed successfully.");
+
+            // Update the file based on user type
+            if (user instanceof Admin) {
+                AdminFileHandler.updateAdminFile(users, "admin.txt");
+            } else {
+                StudentFileHandler.updateStudentFile(users, "student.txt"); // If students have a separate file
+            }
+
+        } catch (UserNotFoundException e) {
+            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Something went wrong: " + e.getMessage());
+        } finally {
+            System.out.println("Finished removing user.");
         }
-        users.remove(user);
-        System.out.println(user.getFirstName() + " " + user.getLastName() + " removed successfully.");
     }
 
+
+    // Find User by email
+    public User findUserByEmail(String email) {
+        for (User user : users) {
+            if (user.getEmail().equals(email)) {
+                return user;
+            }
+        }
+        return null;
+    }
+    
     // Get Admin by ID
     public Admin getAdminById(String adminId) throws UserNotFoundException {
         for (User user : users) {
@@ -56,7 +93,7 @@ public class UserManager {
         }
     }
 
-    // 🔹 Login method - Finds the user and sets `currentUser`
+    // Login method - Finds the user and sets `currentUser`
     public boolean loginUser(String email, String password) {
         for (User user : users) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
@@ -69,18 +106,4 @@ public class UserManager {
         return false;
     }
 
-    // 🔹 Logout method - Clears the session
-    public void logoutUser() {
-        if (currentUser != null) {
-            System.out.println("User " + currentUser.getFirstName() + " logged out successfully.");
-            currentUser = null;
-        } else {
-            System.out.println("No user is currently logged in.");
-        }
-    }
-
-    // 🔹 Get the currently logged-in user
-    public static User getLoggedInUser() {
-        return currentUser;
-    }
 }
