@@ -43,10 +43,24 @@ public class Student extends User {
         this.enrollmentDate = enrollmentDate;
     }
 
-    // isEqual Method
-    public boolean isEqual(Student otherStudent) {
-        return this.studentId.equals(otherStudent.studentId);
+    // Equals Method
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Student student = (Student) obj;
+        return studentId.equals(student.studentId);
     }
+
+    @Override
+    public int hashCode() {
+        return studentId.hashCode();
+    }
+
 
     // toString Method
     @Override
@@ -59,5 +73,10 @@ public class Student extends User {
                 + ", DOB: " + getDob()
                 + ", Address: " + address
                 + ", Enrollment Date: " + enrollmentDate;
+    }
+
+    @Override
+    protected int getUserId() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
