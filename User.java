@@ -1,5 +1,5 @@
 
-public abstract class User implements Authentication {
+public abstract class User implements Authentication{
 
     private String firstName;
     private String lastName;
@@ -16,6 +16,7 @@ public abstract class User implements Authentication {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.dob= dob;
         this.age = age;
         this.sex = sex;
         this.email = email;
@@ -108,14 +109,32 @@ public abstract class User implements Authentication {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-}
-    // toString Method - returns a string representation of User
+
+    // Equals Method
     @Override
-    public String toString() {
-        return "User: " + firstName + " " + lastName 
-                + ", Email: " + email
-                + ", Age: " + age
-                + ", Sex: " + sex
-                + ", Phone: " + phoneNumber;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        User user = (User) obj;
+        return email.equals(user.email);  // Assuming email uniquely identifies a user
     }
+
+    @Override
+    public int hashCode() {
+        return email.hashCode();
+    }
+
+        // toString Method - returns a string representation of User
+        @Override
+        public String toString() {
+            return "User: " + firstName + " " + lastName 
+                    + ", Email: " + email
+                    + ", Age: " + age
+                    + ", Sex: " + sex
+                    + ", Phone: " + phoneNumber;
+        }
+
+        protected abstract int getUserId();
+    
+    
 }
