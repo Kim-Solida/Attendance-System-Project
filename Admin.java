@@ -85,4 +85,9 @@ public class Admin extends User {
                 + ", Work Address: " + workAddress
                 + ", Hire Date: " + hireDate;
     }
+
+    @Override
+    protected int getUserId() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
